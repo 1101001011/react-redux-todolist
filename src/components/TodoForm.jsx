@@ -2,16 +2,20 @@ import React, {useState} from 'react';
 import MyInput from "./UI/input/MyInput";
 import MyButton from "./UI/button/MyButton";
 import MySelect from "./UI/select/MySelect";
-import {addTodo} from "../store/reducers/todoReducer";
-import {useDispatch} from "react-redux";
+import {addTodo, setSelectValue} from "../store/reducers/todoReducer";
+import {useDispatch, useSelector} from "react-redux";
 
 const TodoForm = () => {
-    const dispatch = useDispatch()
     const [value, setValue] = useState('')
+    let todo = useSelector(state => state.todos.todo)
+    const dispatch = useDispatch()
+
+    const setColor = (color) => todo = {...todo, color: color}
 
     const addHandler = () => {
-        dispatch(addTodo({id: Date.now(), title: value}))
+        dispatch(addTodo({...todo, id: Date.now(), title: value}))
         setValue('')
+        dispatch(setSelectValue())
     }
 
     return (
@@ -22,7 +26,7 @@ const TodoForm = () => {
                 placeholder="Your todo.."
                 onChange={(e) => setValue(e.target.value)}
             />
-            <MySelect/>
+            <MySelect setColor={setColor}/>
             <MyButton onClick={() => addHandler()}>
                 Add
             </MyButton>

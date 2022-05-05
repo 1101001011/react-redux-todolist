@@ -7,6 +7,7 @@ const TodoItem = ({todo}) => {
 
     return (
         <div
+            style={ todo.color ? { backgroundColor: todo.color} : { border: '1px solid #ccc' }}
             className='todo__item'
             onClick={() => dispatch(removeTodo(todo.id))}
         >

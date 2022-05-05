@@ -4,7 +4,9 @@ const todoReducer = createSlice({
     name: 'todo',
     initialState: {
         todos: [],
-        categories: ['Study', 'Sports', 'Daily', 'Job']
+        todo: {},
+        categories: ['Study', 'Sports', 'Daily', 'Job'],
+        selectValue: 'Categories'
     },
     reducers: {
         addTodo(state, action) {
@@ -13,11 +15,11 @@ const todoReducer = createSlice({
         removeTodo(state, action) {
             state.todos = state.todos.filter(todo => todo.id !== action.payload)
         },
-        changeColor(state, action) {
-            state.todos.color = action.payload
+        setSelectValue(state, action) {
+            state.selectValue = action.payload || 'Categories'
         }
     }
 })
 
 export default todoReducer.reducer
-export const {addTodo, removeTodo, changeColor} = todoReducer.actions
+export const {addTodo, removeTodo, setSelectValue} = todoReducer.actions
