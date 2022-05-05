@@ -3,7 +3,8 @@ import {createSlice} from "@reduxjs/toolkit";
 const todoReducer = createSlice({
     name: 'todo',
     initialState: {
-        todos: []
+        todos: [],
+        categories: ['Study', 'Sports', 'Daily', 'Job']
     },
     reducers: {
         addTodo(state, action) {
@@ -11,9 +12,12 @@ const todoReducer = createSlice({
         },
         removeTodo(state, action) {
             state.todos = state.todos.filter(todo => todo.id !== action.payload)
+        },
+        changeColor(state, action) {
+            state.todos.color = action.payload
         }
     }
 })
 
 export default todoReducer.reducer
-export const {addTodo, removeTodo} = todoReducer.actions
+export const {addTodo, removeTodo, changeColor} = todoReducer.actions

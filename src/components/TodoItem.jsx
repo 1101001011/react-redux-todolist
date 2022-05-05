@@ -1,7 +1,10 @@
 import React from 'react';
 import {removeTodo} from "../store/reducers/todoReducer";
+import {useDispatch} from "react-redux";
 
-const TodoItem = ({todo, dispatch}) => {
+const TodoItem = ({todo}) => {
+    const dispatch = useDispatch()
+
     return (
         <div
             className='todo__item'
