@@ -30,6 +30,11 @@ const MySelect = ({setColor}) => {
                     : <img src="https://img.icons8.com/ios-glyphs/90/000000/expand-arrow--v1.png" alt=''/>
                 }
             </div>
+            <div
+                className={active ? "select__overlay active" : "select__overlay"}
+                onClick={() => setActive(false)}
+            >
+            </div>
             <div className={active ? "select__modal active" : "select__modal"}>
                 {categories.map(category =>
                     <MyCategory category={category} onClick={() => categoryHandler(category)} key={category}/>

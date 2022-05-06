@@ -2,7 +2,10 @@
   margin-left: 10px;
   padding: 5px 15px;
   color: #fff;
-  background-color: #000;
+  background-color: #5d5d5d;
   border: none;
-  cursor: pointer;
+  &.active {
+    background-color: #000;
+    cursor: pointer;
+  }
 }

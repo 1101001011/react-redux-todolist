@@ -20,7 +20,7 @@ const TodoForm = () => {
     }
 
     return (
-        <div className="todo__form">
+        <form className="todo__form" onSubmit={() => addHandler()}>
             <MyInput
                 value={todo.title}
                 type="text"
@@ -28,10 +28,10 @@ const TodoForm = () => {
                 onChange={(e) => setTodo({...todo, title: e.target.value})}
             />
             <MySelect setColor={setColor}/>
-            <MyButton disabled={!todo.title} onClick={() => addHandler()}>
+            <MyButton todoTitle={todo.title} disabled={!todo.title} onClick={() => addHandler()}>
                 Add
             </MyButton>
-        </div>
+        </form>
     );
 };
 

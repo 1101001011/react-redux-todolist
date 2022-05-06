@@ -29,7 +29,6 @@ const TodoList = () => {
                     />
                   )
             }
-
         </div>
     );
 };

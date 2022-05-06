@@ -1,8 +1,8 @@
-import React from 'react';
-import './MyButton.scss'
+import React from "react";
+import "./MyButton.scss"
 
-const MyButton = ({children, ...props}) => (
-    <button className="btn" {...props}>
+const MyButton = ({todoTitle, children, ...props}) => (
+    <button className={todoTitle ? "btn active" : "btn"} {...props}>
         {children}
     </button>
 )
