@@ -2,32 +2,33 @@ import React, {useState} from 'react';
 import MyInput from "./UI/input/MyInput";
 import MyButton from "./UI/button/MyButton";
 import MySelect from "./UI/select/MySelect";
-import {addTodo, setSelectValue} from "../store/reducers/todoReducer";
-import {useDispatch, useSelector} from "react-redux";
+import {setSelectValue} from "../store/reducers/todoReducer";
+import {useDispatch} from "react-redux";
+import {firebaseState} from "../store/firebase/firebaseState";
 
 const TodoForm = () => {
-    const [value, setValue] = useState('')
-    let todo = useSelector(state => state.todos.todo)
+    const [todo, setTodo] = useState({title: ''})
     const dispatch = useDispatch()
+    const firebase = firebaseState(dispatch)
 
-    const setColor = (color) => todo = {...todo, color: color}
+    const setColor = (color) => setTodo({...todo, color: color})
 
     const addHandler = () => {
-        dispatch(addTodo({...todo, id: Date.now(), title: value}))
-        setValue('')
+        firebase.addTodoFB({...todo, date: new Date().toJSON()})
         dispatch(setSelectValue())
+        setTodo({title: ''})
     }
 
     return (
         <div className="todo__form">
             <MyInput
-                value={value}
+                value={todo.title}
                 type="text"
                 placeholder="Your todo.."
-                onChange={(e) => setValue(e.target.value)}
+                onChange={(e) => setTodo({...todo, title: e.target.value})}
             />
             <MySelect setColor={setColor}/>
-            <MyButton onClick={() => addHandler()}>
+            <MyButton disabled={!todo.title} onClick={() => addHandler()}>
                 Add
             </MyButton>
         </div>

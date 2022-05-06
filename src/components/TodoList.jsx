@@ -1,24 +1,35 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import TodoItem from "./TodoItem";
-import TodoForm from "./TodoForm";
-import {removeTodo} from "../store/reducers/todoReducer";
+import {firebaseState} from "../store/firebase/firebaseState";
+import MyLoader from "./UI/loader/MyLoader";
 
 const TodoList = () => {
-    const todos = useSelector(state => state.todos.todos)
+    const {todos, loading} = useSelector(state => state.todos)
     const dispatch = useDispatch()
+    const firebase = firebaseState()
+
+    useEffect(() => {
+        firebase.fetchTodosFB(dispatch)
+    }, [])
+
+    if (!todos.length && !loading) return <p className="todo__absence">No todos</p>
 
     return (
         <div>
-            <h1 className="todo__title">TodoList</h1>
-            <TodoForm/>
-            {todos.map(todo =>
-                <TodoItem
-                    todo={todo}
-                    onClick={() => dispatch(removeTodo(todo.id))}
-                    key={todo.id}
-                />
-            )}
+            {loading
+                ? <div className="todo__loader">
+                    <MyLoader/>
+                  </div>
+                : todos.map(todo =>
+                    <TodoItem
+                        todo={todo}
+                        onClick={() => firebase.removeTodoFB(todo.id, dispatch)}
+                        key={todo.id}
+                    />
+                  )
+            }
+
         </div>
     );
 };

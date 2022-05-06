@@ -4,13 +4,21 @@ const todoReducer = createSlice({
     name: 'todo',
     initialState: {
         todos: [],
-        todo: {},
+        loading: false,
         categories: ['Study', 'Sports', 'Daily', 'Job'],
-        selectValue: 'Categories'
+        selectValue: 'Categories',
     },
     reducers: {
+        showLoader(state) {
+            state.loading = true
+        },
         addTodo(state, action) {
+            state.loading = false
             state.todos.unshift(action.payload)
+        },
+        fetchTodos(state, action) {
+            state.loading = false
+            state.todos = (action.payload).reverse()
         },
         removeTodo(state, action) {
             state.todos = state.todos.filter(todo => todo.id !== action.payload)
@@ -22,4 +30,4 @@ const todoReducer = createSlice({
 })
 
 export default todoReducer.reducer
-export const {addTodo, removeTodo, setSelectValue} = todoReducer.actions
+export const {showLoader, addTodo, fetchTodos, removeTodo, setSelectValue} = todoReducer.actions
