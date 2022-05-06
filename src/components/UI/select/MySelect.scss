@@ -18,16 +18,14 @@
   }
   &__modal {
     position: absolute;
+    display: none;
     width: 170px;
     background-color: #fff;
     border: 1px solid rgb(201, 201, 201);
     border-top: none;
-    opacity: 0;
-    z-index: -1;
   }
   &__modal.active {
-    opacity: 1;
-    z-index: 1;
+    display: block;
   }
   &__category {
     padding: 10px 11px;

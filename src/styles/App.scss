@@ -17,7 +17,7 @@ html {
   margin: 100px auto;
 }
 
-.todo__title {
+.App__title {
   text-align: center;
   margin-bottom: 40px;
 }
@@ -29,5 +29,26 @@ html {
 
 .todo__item {
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 16px 20px;
+}
+
+.todo__title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.todo__date {
+  font-size: 14px;
+  color: #565656;
+}
+
+.todo__loader {
+  display: flex;
+  justify-content: center;
+}
+
+.todo__absence {
+  text-align: center;
+  color: #c4c4c4;
 }
