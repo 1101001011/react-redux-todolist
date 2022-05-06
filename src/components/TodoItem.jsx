@@ -3,7 +3,7 @@ import React from "react";
 const TodoItem = ({todo, ...props}) => (
     <div
         style={ todo.color ? { backgroundColor: todo.color} : { border: '1px solid #ccc' }}
-        className="todo__item"
+        className="todo"
         {...props}
     >
         <p className="todo__title">{todo.title}</p>

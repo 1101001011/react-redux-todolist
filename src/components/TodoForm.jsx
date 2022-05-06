@@ -20,7 +20,7 @@ const TodoForm = () => {
     }
 
     return (
-        <form className="todo__form" onSubmit={() => addHandler()}>
+        <form className="App__form" onSubmit={() => addHandler()}>
             <MyInput
                 value={todo.title}
                 type="text"

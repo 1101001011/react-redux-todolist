@@ -1,0 +1,30 @@
+.todo {
+  margin-bottom: 10px;
+  padding: 16px 20px;
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  &__date {
+    font-size: 14px;
+    color: #565656;
+  }
+  &__loader {
+    display: flex;
+    justify-content: center;
+  }
+  &__absence {
+    text-align: center;
+    color: #ababab;
+  }
+
+  &-exit {
+    opacity: 1;
+  }
+  &-exit-active {
+    opacity: 0;
+    transform: translateX(-250px);
+    transition: all .1s ease-out;
+  }
+}
