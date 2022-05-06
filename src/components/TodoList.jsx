@@ -1,34 +1,27 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import React from "react";
 import TodoItem from "./TodoItem";
-import {firebaseState} from "../store/firebase/firebaseState";
-import MyLoader from "./UI/loader/MyLoader";
+import {CSSTransition, TransitionGroup} from "react-transition-group";
 
-const TodoList = () => {
-    const {todos, loading} = useSelector(state => state.todos)
-    const dispatch = useDispatch()
-    const firebase = firebaseState()
-
-    useEffect(() => {
-        firebase.fetchTodosFB(dispatch)
-    }, [])
-
+const TodoList = ({todos, loading, firebase, dispatch}) => {
     if (!todos.length && !loading) return <p className="todo__absence">No todos</p>
 
     return (
         <div>
-            {loading
-                ? <div className="todo__loader">
-                    <MyLoader/>
-                  </div>
-                : todos.map(todo =>
-                    <TodoItem
-                        todo={todo}
-                        onClick={() => firebase.removeTodoFB(todo.id, dispatch)}
+            <TransitionGroup>
+                {todos.map(todo =>
+                    <CSSTransition
                         key={todo.id}
-                    />
-                  )
-            }
+                        timeout={500}
+                        classNames="todo"
+                    >
+                        <TodoItem
+                            todo={todo}
+                            onClick={() => firebase.removeTodoFB(todo.id, dispatch)}
+                            key={todo.id}
+                        />
+                    </CSSTransition>)
+                }
+            </TransitionGroup>
         </div>
     );
 };
